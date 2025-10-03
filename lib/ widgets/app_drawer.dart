@@ -1,75 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-// شاشاتك
-import 'screens/crops_screen.dart';
-import 'screens/diagnosis_screen.dart';
-import 'screens/history_screen.dart';
-import 'screens/home_screen.dart';
-import 'screens/services_screen.dart';
-import 'screens/weather_screen.dart';
+import '../screens/crops_screen.dart';
+import '../screens/diagnosis_screen.dart';
+import '../screens/history_screen.dart';
+import '../screens/home_screen.dart';
+import '../screens/services_screen.dart';
+import '../screens/weather_screen.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  runApp(const SmartFarmerApp());
-}
-
-class SmartFarmerApp extends StatelessWidget {
-  const SmartFarmerApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = ThemeData(
-      useMaterial3: true,
-      fontFamily: 'Roboto',
-      colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2E7D32)),
-      scaffoldBackgroundColor: const Color(0xFFF7FAF7),
-      textTheme: const TextTheme(
-        headlineLarge: TextStyle(fontWeight: FontWeight.bold),
-        headlineMedium: TextStyle(fontWeight: FontWeight.w700),
-        titleMedium: TextStyle(fontWeight: FontWeight.w600),
-        bodyLarge: TextStyle(height: 1.5),
-        bodyMedium: TextStyle(height: 1.5),
-      ),
-    );
-
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'المزارع الذكي',
-      theme: theme,
-      builder: (context, child) =>
-          Directionality(textDirection: TextDirection.rtl, child: child!),
-      initialRoute: HomeScreen.routeName,
-      routes: {
-        HomeScreen.routeName: (_) => const Shell(child: HomeScreen()),
-        DiagnosisScreen.routeName: (_) => const Shell(child: DiagnosisScreen()),
-        CropsScreen.routeName: (_) => const Shell(child: CropsScreen()),
-        WeatherScreen.routeName: (_) => const Shell(child: WeatherScreen()),
-        ServicesScreen.routeName: (_) => const Shell(child: ServicesScreen()),
-        HistoryScreen.routeName: (_) => const Shell(child: HistoryScreen()),
-      },
-    );
-  }
-}
-
-class Shell extends StatelessWidget {
-  final Widget child;
-  const Shell({super.key, required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('المزارع الذكي'), centerTitle: true),
-      drawer: const AppDrawer(), // ← القائمة الجانبية مضمّنة أدناه
-      body: SafeArea(child: child),
-    );
-  }
-}
-
-/// القائمة الجانبية — مضمّنة هنا لتجاوز خطأ الملف المفقود
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
 
@@ -85,6 +24,7 @@ class AppDrawer extends StatelessWidget {
     Navigator.of(context).pop();
     if (ModalRoute.of(context)?.settings.name == route) return;
     Navigator.of(context).pushReplacementNamed(route);
+    return;
   }
 
   @override
