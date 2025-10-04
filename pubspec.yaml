@@ -1,51 +1,71 @@
 name: smart_farmer
-description: "المزارع الذكي: تشخيص أمراض النباتات أوفلاين + إدارة محاصيل + طقس + سجل محلي"
+description: >
+  تطبيق "المزارع الذكي" لتشخيص أمراض النباتات بالصور وعرض العلاج والإرشادات.
 publish_to: "none"
+
+# عدّل الإصدار كما تحتاج
 version: 1.0.0+1
 
 environment:
   sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.19.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  # واجهة
+  # واجهة آبل (أيقونات iOS)
   cupertino_icons: ^1.0.8
-  font_awesome_flutter: ^10.9.0
 
-  # نظام وتشغيل
-  url_launcher: ^6.3.0
+  # حالة التطبيق (استُخدم في الكود عندك)
+  provider: ^6.1.2
+
+  # طلبات HTTP لو احتجت استدعاء API
   http: ^1.2.2
-  intl: ^0.19.0
 
-  # صور/كاميرا ومعالجة
-  image_picker: ^1.2.0
-  image: ^4.1.7
+  # تنسيقات التواريخ والأرقام
+  intl: ^0.20.2
 
-  # قاعدة بيانات وملفات
-  sqflite: ^2.3.3
+  # مسارات التخزين المحلية (اختياري لكنه مفيد)
   path_provider: ^2.1.4
-  path: ^1.9.0
 
-  # موقع + طقس
-  geolocator: ^13.0.2
-
-  # ذكاء اصطناعي (TFLite) — بدون helper
+  # التقط صور/اختيار من المعرض إن احتجت (اختياري)
+  image_picker: ^1.1.2
+  font_awesome_flutter: ^10.9.1
+  url_launcher: ^6.3.2
+  sqflite: ^2.4.2
   tflite_flutter: ^0.11.0
+  geolocator: ^14.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.2
+  flutter_lints: ^6.0.0
+
+  # توليد أيقونة التطبيق لكل الـ mipmap (الحل الأفضل لمشكلة الأيقونة)
+  flutter_launcher_icons: ^0.14.4
 
 flutter:
   uses-material-design: true
-  assets:
-    # بيانات المحاصيل (أوفلاين)
-    - assets/crops/metadata.json
 
-    # ملفات نموذج الذكاء الاصطناعي
-    # (تأكد من وجودها فعليًا أو علّق السطرين مؤقتًا لتفادي Missing asset)
-    - assets/model/plant_disease.tflite
-    - assets/model/labels.txt
+  # ضف أصولك هنا (احفظ الصورة في المسار أدناه)
+  assets:
+    - assets/icon.png
+    # - assets/images/
+    # - assets/models/
+    # - assets/i18n/
+
+  # مثال للخطوط إن أردت لاحقًا
+  # fonts:
+  #   - family: Cairo
+  #     fonts:
+  #       - asset: assets/fonts/Cairo-Regular.ttf
+  #       - asset: assets/fonts/Cairo-Bold.ttf
+  #         weight: 700
+
+# إعداد flutter_launcher_icons
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/logo.png
+  min_sdk_android: 21
